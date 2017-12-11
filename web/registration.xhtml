@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body><br></br>
+        
+        <h2>User Registration</h2>
+        <h:form>
+            <p:outputLabel><div align="center">Enter User Details</div></p:outputLabel>
+            <table align="center">
+                <tr>
+                  <td>Username</td>
+                  <td><p:inputText pt:placeholder="Eg,Alipah" value="#{storeController.user}"/></td>
+                </tr>
+                <tr>
+                  <td>Password</td>
+                  <td><p:inputText pt:placeholder="Max 10 character" value="#{storeController.pwd}"/></td>
+                </tr>
+                
+             </table> 
+        
+            <center>
+                <p:commandButton value="Apply!" action="#{storeController.addindb2()}" ></p:commandButton>
+            </center>
+                <br></br>
+            <p:link value="Home" outcome="/index.xhtml"></p:link>
+    
+        </h:form>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 3, 2017 4:04:15 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.pelikbetul.Payment" table="payment" catalog="bookstore" optimistic-lock="version">
+        <id name="paymentid" type="java.lang.Integer">
+            <column name="paymentid" />
+            <generator class="identity" />
+        </id>
+        <property name="custid" type="int">
+            <column name="custid" not-null="true" />
+        </property>
+        <property name="totalprice" type="double">
+            <column name="totalprice" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

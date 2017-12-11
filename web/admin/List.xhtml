@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head><h:outputLabel >Hello , #{storeController.getUserSession()} #{storeController.makelist()}</h:outputLabel><br></br>
+        <h:form> <h:commandButton value="Logout" action="#{storeController.logout()}"></h:commandButton>
+        </h:form>
+          
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h1>BOOKS AVAILABLE</h1>
+      
+           
+            <h:form>
+            <p:dataTable var="listmem" value="#{storeController.lb}">
+            <p:column>
+                <f:facet name="header">Book ID</f:facet>
+                #{listmem.bookid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Title</f:facet>
+                #{listmem.btitle}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Isbn</f:facet>
+                #{listmem.bisbn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Quantity</f:facet>
+                #{listmem.quantity}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Price</f:facet>
+                #{listmem.price}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Edit</f:facet>
+                <h:commandButton value="Update" actionListener="#{storeController.getAllByIDShow(listmem.bookid, listmem.btitle, listmem.bisbn
+                                                                , listmem.quantity, listmem.price)}" action="update"></h:commandButton><br></br>
+            </p:column>
+            <p:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton value="Delete" action="${storeController.deletehuhu(listmem.bookid)}"></h:commandButton>
+            </p:column>
+        </p:dataTable>
+                </h:form>
+        <br></br><br></br><br></br>
+    
+    </h:body>
+</html>
+
