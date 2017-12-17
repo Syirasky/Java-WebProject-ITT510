@@ -4,13 +4,52 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    </h:head>
+     <h:body>
+        <h1>BOOKS IN CART</h1>
+        
+           
+            <p:dataTable var="listmem" value="#{storeController.bookcart}">
+            <p:column rendered="false">
+                <f:facet name="header">Book ID</f:facet>
+                #{listmem.bookid}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Title</f:facet>
+                #{listmem.btitle}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Isbn</f:facet>
+                #{listmem.bisbn}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Book Price</f:facet>
+                #{listmem.price}
+            </p:column>
+            
+        </p:dataTable>
+  
+        <br></br><br></br>
+
+        <h:form>
+            <p:panelGrid columns="3">            
+                <h:outputText value="Total Price (RM)" /> 
+                <h:outputText value="#{storeController.calculateTotal()}" /> 
+                <h:commandButton value="Pay And Checkout" actionListener="#{storeController.addindbpayment()}" ></h:commandButton>
+            
+            </p:panelGrid>
+        </h:form>
+            
+                  
+        <br></br>
+       
+    </h:body>
 </html>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:payment xmlns:ns2="payment">
+    <paymentid>1</paymentid>
+    <custid>0</custid>
+    <totalprice>230.0</totalprice>
+</ns2:payment>

@@ -34,18 +34,17 @@ import org.hibernate.mapping.Map;
 public class test {
     public static void main(String[] args) {
 		System.out.println("running");
-                Session session = NewHibernateUtil.getSessionFactory().openSession();
-		Books s =  new Books(123,"update","update",1,1);
-		session.beginTransaction();
-		Query query = session.createQuery("update Books set btitle = 'ABCD E'" +
-    				" where bookid = 102");
-                int result = query.executeUpdate();
-		session.getTransaction().commit();
-		session.close();
-                System.out.println("Result "+result);
                 
-                StoreController a = new StoreController();
-                a.setAfterBuy(102);
+                //StoreController a = new StoreController();
+             //   a.AddtoCart(102);
+            //    a.AddtoCart(107);
+             //   a.AddtoCart(107);
+             //   a.calculateTotal();
+            //    System.out.println("Total Price Test:"+a.getTotalprice());
+            //    a.addindbpayment();
+               ObjToXml o2x = new ObjToXml();
+               o2x.createPayXml();
+              
         
 	}
 }

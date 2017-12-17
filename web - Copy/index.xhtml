@@ -5,19 +5,16 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head><h:outputLabel >Hello , #{storeController.getUserSession()} #{storeController.makelist()}</h:outputLabel><br></br>
-        <h:form> <h:commandButton value="Logout" action="#{storeController.logout()}"></h:commandButton>
-        </h:form>
-          
+    <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
         <h1>BOOKS AVAILABLE</h1>
-      
-           
+        
+            #{storeController.makelist()}
             <h:form>
             <p:dataTable var="listmem" value="#{storeController.lb}">
-            <p:column>
+            <p:column rendered="false">
                 <f:facet name="header">Book ID</f:facet>
                 #{listmem.bookid}
             </p:column>
@@ -38,17 +35,14 @@
                 #{listmem.price}
             </p:column>
             <p:column>
-                <f:facet name="header">Edit</f:facet>
-                <h:commandButton value="Update" actionListener="#{storeController.getAllByIDShow(listmem.bookid, listmem.btitle, listmem.bisbn
-                                                                , listmem.quantity, listmem.price)}" action="update"></h:commandButton><br></br>
+                <f:facet name="header">Add To Cart</f:facet>
+                <h:commandButton value="Add" actionListener="#{storeController.AddtoCart(listmem.bookid)}" ></h:commandButton><br></br>
             </p:column>
-            <p:column>
-                <f:facet name="header">Delete</f:facet>
-                <h:commandButton value="Delete" action="${storeController.deletehuhu(listmem.bookid)}"></h:commandButton>
-            </p:column>
+            
         </p:dataTable>
-                </h:form>
+  
         <br></br><br></br><br></br>
+        </h:form>
     </h:body>
 </html>
 
