@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URL;
+import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
@@ -43,8 +44,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Crappy
  */
-
-
 @Named(value = "storeController")
 @SessionScoped
 public class StoreController implements Serializable {
@@ -342,7 +341,7 @@ public class StoreController implements Serializable {
         
         clear();
             try{
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/index.xhtml");
+                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/admin/List.xhtml");
                     
             } 
             catch (IOException e) {}
@@ -380,7 +379,7 @@ public class StoreController implements Serializable {
             session.flush();
             session.close();
         }
-        
+        setLp(bs);
         return bs;
     }
       public List<Books> getBooksByIsbn(String bis) {
@@ -460,7 +459,7 @@ public class StoreController implements Serializable {
         this.price=pr;
         return "/admin/update.xhtml";
     }
-     public void updateB() {
+     public String updateB() {
         Books b2 = new Books(bookid, btitle, bisbn,quantity,price);
         session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -468,7 +467,7 @@ public class StoreController implements Serializable {
         query.executeUpdate(); 
         session.getTransaction().commit();
         session.close();
-       
+       return "/admin/List.xhtml";
     }
      
      public void testurl(){
@@ -587,10 +586,10 @@ public class StoreController implements Serializable {
        
         session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        String q = "from User where user=:userName and pwd=:password";
+        String q = "from User where user=:userName2 and pwd=:password2";
         Query query = session.createQuery(q);
-        query.setParameter("userName", getUser());
-        query.setParameter("password", getPwd());
+        query.setParameter("userName2", getUser());
+        query.setParameter("password2", getPwd());
         
         if(query.list().size() == 0){
         System.out.println("Account does not exist!");
@@ -599,7 +598,7 @@ public class StoreController implements Serializable {
                     System.out.println("Login Success!");
                     setLu((List<User>) query.list());
                     HttpSession s = getSession();
-                                    s.setAttribute("username", getUser());
+                                    s.setAttribute("username2", getUser());
                     List<User> userlist = new ArrayList<User>(); 
                     userlist = getLu();
                     for(User k:userlist){
@@ -616,14 +615,14 @@ public class StoreController implements Serializable {
 	public String getUserSession2() {
 		HttpSession s = getSession();
                 testurl();
-		if (s.getAttribute("username") == null){
+		if (s.getAttribute("username2") == null){
                         try {
                                    FacesContext.getCurrentInstance().getExternalContext()
                                  .redirect("/BookStorePelikSangat/faces/login.xhtml");
                                } 
                         catch (IOException e) {}
                 }
-                return (String) s.getAttribute("username");
+                return (String) s.getAttribute("username2");
 	}
         
         
@@ -775,6 +774,10 @@ public class StoreController implements Serializable {
          
     }   
         
+        public void CreateReport(){
+              ObjToXml o2x = new ObjToXml();
+              o2x.createPayXml();
+        }
         
         //********************************************************************
      

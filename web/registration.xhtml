@@ -10,33 +10,57 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-  <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <body><br></br>
-        
-        <h2>User Registration</h2>
-        <h:form>
-            <p:outputLabel><div align="center">Enter User Details</div></p:outputLabel>
-            <table align="center">
-                <tr>
-                  <td>Username</td>
-                  <td><p:inputText pt:placeholder="Eg,Alipah" value="#{storeController.user}"/></td>
-                </tr>
-                <tr>
-                  <td>Password</td>
-                  <td><p:inputText pt:placeholder="Max 10 character" value="#{storeController.pwd}"/></td>
-                </tr>
+  
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
                 
-             </table> 
-        
-            <center>
-                <p:commandButton value="Apply!" action="#{storeController.addindb2()}" ></p:commandButton>
-            </center>
-                <br></br>
-            <p:link value="Home" outcome="/index.xhtml"></p:link>
-    
-        </h:form>
-    </body>
+
+                <p:layoutUnit position="center">
+                <h:form>
+                    <p:outputLabel><div align="center">Enter User Details</div></p:outputLabel>
+                    <table align="center">
+                        <tr>
+                          <td>Username</td>
+                          <td><p:inputText pt:placeholder="Eg,Alipah" value="#{storeController.user}"/></td>
+                        </tr>
+                        <tr>
+                          <td>Password</td>
+                          <td><p:password pt:placeholder="Max 10 character" value="#{storeController.pwd}"/></td>
+                        </tr>
+
+                     </table> 
+
+                    <center>
+                        <p:commandButton value="Apply!" action="#{storeController.addindb2()}" ></p:commandButton>
+                    </center>
+                        <br></br>
+                    <p:link value="Login" outcome="/login.xhtml"></p:link>
+
+                </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
 </html>
+

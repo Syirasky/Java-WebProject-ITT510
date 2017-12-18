@@ -10,41 +10,71 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-  <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        #{storeController.clear()}
-    </h:head>
-    <body><h:outputLabel >Hello , #{storeController.getUserSession()}</h:outputLabel><br></br>
-        
-        <h2>Add Book Stocks</h2>
-        <h:form>
-            <p:outputLabel><div align="center">Enter Book Details</div></p:outputLabel>
-            <table align="center">
-                <tr>
-                  <td>Book Title</td>
-                  <td><p:inputText pt:placeholder="Eg,Java 101 by Alipah" value="#{storeController.btitle}"/></td>
-                </tr>
-                <tr>
-                  <td>Book Isbn</td>
-                  <td><p:inputText pt:placeholder="Eg, 101011" value="#{storeController.bisbn}"/></td>
-                </tr>
-                <tr>
-                  <td>Book Quantity</td>
-                  <td><p:inputText pt:placeholder="Eg,3" value="#{storeController.quantity}"/></td>
-                </tr>
-                <tr>
-                  <td>Book Price</td>
-                  <td><p:inputText pt:placeholder="Eg, Rm100" value="#{storeController.price}"/></td>
-                </tr>
-             </table> 
-        
-            <center>
-                <p:commandButton value="Apply!" action="#{storeController.addindb()}" ></p:commandButton>
-            </center>
-                <br></br>
-            <p:link value="Home" outcome="/index.xhtml"></p:link>
-    
-        </h:form>
-    </body>
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="15%" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="List Books" url="http://localhost:8080/BookStorePelikSangat/faces/admin/List.xhtml" />
+                            <p:menuitem value="Add Books" url="http://localhost:8080/BookStorePelikSangat/faces/admin/AddStock.xhtml" />
+                            <p:menuitem value="Generate Report" url="http://localhost:8080/BookStorePelikSangat/faces/admin/CreateReport.xhtml" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                <h:form>    #{storeController.clear()}Hello , #{storeController.getUserSession()}
+                        <p:outputLabel><div align="center">Enter Book Details</div></p:outputLabel>
+                        <table align="center">
+                            <tr>
+                              <td>Book Title</td>
+                              <td><p:inputText pt:placeholder="Eg,Java 101 by Alipah" value="#{storeController.btitle}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Book Isbn</td>
+                              <td><p:inputText pt:placeholder="Eg, 101011" value="#{storeController.bisbn}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Book Quantity</td>
+                              <td><p:inputText pt:placeholder="Eg,3" value="#{storeController.quantity}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Book Price</td>
+                              <td><p:inputText pt:placeholder="Eg, Rm100" value="#{storeController.price}"/></td>
+                            </tr>
+                         </table> 
+
+                        <center>
+                            <p:commandButton value="Apply!" action="#{storeController.addindb()}" ></p:commandButton>
+                        </center>
+                            <br></br>
+                        <p:link value="Home" outcome="/index.xhtml"></p:link>
+
+                    </h:form>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
 </html>

@@ -40,8 +40,17 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                content disini
-  
+                  <h:form>
+                <br><h1>Update Books</h1></br>
+                ID:<br><p:inputText value="#{storeController.bookid}"></p:inputText></br>
+                Book Title:<br><p:inputText value="#{storeController.btitle}"></p:inputText></br>
+                Book ISBN:<br><p:inputText value="#{storeController.bisbn}"></p:inputText></br>
+                Quantity:<br><p:inputText value="#{storeController.quantity}"></p:inputText></br>
+                Price:<br><p:inputText value="#{storeController.price}"></p:inputText></br>
+                
+                <p:commandButton value="Update" actionListener="#{storeController.updateB()}" action="index"></p:commandButton>
+                    </h:form>
+          
                 </p:layoutUnit>
 
             </p:layout>

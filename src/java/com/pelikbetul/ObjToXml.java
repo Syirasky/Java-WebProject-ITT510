@@ -24,18 +24,19 @@ public class ObjToXml {
                 pl = sc.getAllPayments();
                 Payment pay = new Payment();
                 pay = (Payment) pl.get(0);
+                sc.getLp();
                 System.out.println("Going Marshal..\nSize payment list "+pl.size());
-                JAXBContext context = JAXBContext.newInstance(Payment.class);
+                JAXBContext context = JAXBContext.newInstance(Pays.class);
                 Marshaller marshaller = context.createMarshaller();
 
                 /** output the XML in pretty format */
                 marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
                 /** display the output in the console */
-                marshaller.marshal(pay, System.out);
+                marshaller.marshal(new Pays(pl), System.out);
 
                 /** put the XML to the file - will be used by the unmarshal example */
-                marshaller.marshal(pay, new File("pay.xml"));
+                marshaller.marshal(new Pays(pl), new File("pay.xml"));
                 System.out.println("Done..");
                 
             } catch(JAXBException e) {

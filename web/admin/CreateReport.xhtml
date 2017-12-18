@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+  <br></br>
+   
+ <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    Header
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="40" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="15%" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Menu">
+                            <p:menuitem value="List Books" url="http://localhost:8080/BookStorePelikSangat/faces/admin/List.xhtml" />
+                            <p:menuitem value="Add Books" url="http://localhost:8080/BookStorePelikSangat/faces/admin/AddStock.xhtml" />
+                            <p:menuitem value="Generate Report" url="http://localhost:8080/BookStorePelikSangat/faces/admin/CreateReport.xhtml" />
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">Hello , #{storeController.getUserSession()}
+                  <div align="center">    Generate Payment Report To XML
+                    <h:form>
+                        <br></br><br></br><br></br><br></br><br></br><br></br>
+                        <h:commandButton value="Generate Report To XML" action="#{storeController.CreateReport()}"></h:commandButton>
+                    </h:form>
+                    </div>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
