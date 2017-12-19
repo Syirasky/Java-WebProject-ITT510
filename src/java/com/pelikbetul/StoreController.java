@@ -333,22 +333,27 @@ public class StoreController implements Serializable {
      public void addindb(){
         //e = new Event("bbb","bbb","bbb","bbb");
         b = new Books(0,getBtitle(),getBisbn(),getQuantity(),getPrice());
-        session = NewHibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(b);
-        session.getTransaction().commit();
-        session.close();
-        
-        clear();
-            try{
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/admin/List.xhtml");
-                    
-            } 
-            catch (IOException e) {}
-            session.getTransaction().rollback();
+        try{
+                session = NewHibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.save(b);
+                session.getTransaction().commit();
+                session.close();
+
+                clear();
+                    try{
+                            FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/admin/List.xhtml");
+
+                    } 
+                    catch (IOException e) {
+                    }
+
 	}
-    
-    
+        catch(HibernateException e) {
+                session.getTransaction().rollback();
+                session.close();
+           }}
+     
     public List<Books> getAllBooks() {
         List<Books> bs = new ArrayList<Books>();
         Transaction trns = null;
@@ -461,12 +466,17 @@ public class StoreController implements Serializable {
     }
      public String updateB() {
         Books b2 = new Books(bookid, btitle, bisbn,quantity,price);
-        session = NewHibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        Query query = session.createQuery("update Books set btitle = '"+ getBtitle()+"',bisbn='"+getBisbn() +"',quantity="+getQuantity()+",price="+getPrice()+" where bookid ="+getBookid());
-        query.executeUpdate(); 
-        session.getTransaction().commit();
-        session.close();
+            try{    session = NewHibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                Query query = session.createQuery("update Books set btitle = '"+ getBtitle()+"',bisbn='"+getBisbn() +"',quantity="+getQuantity()+",price="+getPrice()+" where bookid ="+getBookid());
+                query.executeUpdate(); 
+                session.getTransaction().commit();
+                session.close();
+            } catch(HibernateException e) {
+                session.getTransaction().rollback();
+                session.close();
+           }
+            
        return "/admin/List.xhtml";
     }
      
@@ -556,31 +566,38 @@ public class StoreController implements Serializable {
     
     //Finish 
      public void deletehuhu(int n){
-        
-        session = NewHibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        e =(Books) session.get(Books.class, n);
-        session.delete(e);
-        session.getTransaction().commit();
-        session.close();
-        makelist();
-        
+        try{
+                session = NewHibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                e =(Books) session.get(Books.class, n);
+                session.delete(e);
+                session.getTransaction().commit();
+                session.close();
+                makelist();
+       } catch(HibernateException e) {
+                session.getTransaction().rollback();
+                session.close();
+           }
     }
      // %%%%%%%%%%%%%%%% User Control %%%%%%%%%%%%%%%%%%%%%%%%%%
       public void addindb2(){
         //e = new Event("bbb","bbb","bbb","bbb");
         u = new User(0,getUser(),getPwd());
-        session = NewHibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(u);
-        session.getTransaction().commit();
-        session.close();
-        clear();
-            try{
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/index.xhtml");
-            } 
-            catch (IOException e) {}
-        
+       try{ 
+            session = NewHibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(u);
+            session.getTransaction().commit();
+            session.close();
+            clear();
+                try{
+                        FacesContext.getCurrentInstance().getExternalContext().redirect("/BookStorePelikSangat/faces/index.xhtml");
+                } 
+                catch (IOException e) {}
+        } catch(HibernateException e) {
+                session.getTransaction().rollback();
+                session.close();
+           }
 	}
       public String dologin2(){
        
@@ -718,8 +735,14 @@ public class StoreController implements Serializable {
         session = NewHibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(pms);
-        session.getTransaction().commit();
-        session.close();
+        try 
+        {
+            session.getTransaction().commit();
+            session.close();
+        } catch(HibernateException e) {
+                session.getTransaction().rollback();
+                session.close();
+           }
         clear();
         setBookcart(null);
         test.clear();
