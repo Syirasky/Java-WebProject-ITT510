@@ -13,6 +13,12 @@
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>PrimeFaces</title>
             </f:facet>
+             <style type="text/css"> 
+                 body {background-color: #9966ff;} 
+                h1 {background-color: #00ff00;} 
+                h2 {background-color: grey;} 
+                p {background-color: rgb(250,0,255);} 
+            </style> 
         </h:head>
 
         <h:body>
@@ -38,13 +44,63 @@
                     </p:menu>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="center">Hello , #{storeController.getUserSession()}
-                  <div align="center">    Generate Payment Report To XML
+                <p:layoutUnit position="center">Hello , #{storeController.getUserSession()}.
+                    <div align="center"> <u>  Generate Payment Report To XML </u>
                     <h:form>
-                        <br></br><br></br><br></br><br></br><br></br><br></br>
-                        <h:commandButton value="Generate Report To XML" action="#{storeController.CreateReport()}"></h:commandButton>
+                      <br></br>
+                        <h4>1. Generate Report</h4> <br></br>
+                        <p:commandButton value="Generate Report To XML" action="#{storeController.CreateReport()}"></p:commandButton>
+                       
+                      
+                        
+                        
+                  
+                        
+                        <h4>2. Download Report</h4> <br></br>
+                               <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+                                    <p:graphicImage name="/demo/images/ajaxloadingbar.gif" />
+                                </p:dialog>
+
+                
+                        <p:commandButton value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start,stop);" icon="ui-icon-arrowthick-1-s">
+                            <p:fileDownload value="#{fileDownloadView.file}" />
+                        </p:commandButton>
                     </h:form>
                     </div>
+                            <script type="text/javascript">
+                            function start() {
+                                PF('statusDialog').show();
+                            }
+
+                            function stop() {
+                                PF('statusDialog').hide();
+                            }
+
+                                    function start() {
+                                    PF('startButton1').disable();
+
+                                    window['progress'] = setInterval(function() {
+                                        var pbClient = PF('pbClient'),
+                                        oldValue = pbClient.getValue(),
+                                        newValue = oldValue + 10;
+
+                                        pbClient.setValue(pbClient.getValue() + 10);
+
+                                        if(newValue === 100) {
+                                            clearInterval(window['progress']);
+                                        }
+
+
+                                    }, 1000);
+                                }
+
+                                function cancel() {
+                                    clearInterval(window['progress']);
+                                    PF('pbClient').setValue(0);
+                                    PF('startButton1').enable();
+                                }
+                                </script>
+                    
                 </p:layoutUnit>
 
             </p:layout>
