@@ -18,10 +18,11 @@ and open the template in the editor.
                 <title>PrimeFaces</title>
             </f:facet>
              <style type="text/css"> 
-                 body {background-color: #9966ff;} 
-                h1 {background-color: #00ff00;} 
+               .ui-layout-unit-content{background-image:url('#{request.contextPath}/resources/img/bg2.jpg');}
+                body {background-color: #9966ff;} 
+             
                 h2 {background-color: grey;} 
-                p {background-color: rgb(250,0,255);} 
+                p {background-color: rgb(250,0,255);}
             </style> 
         </h:head>
 
@@ -30,7 +31,7 @@ and open the template in the editor.
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
+                     <h1><div>BOOK STORE PELIK SANGAT</div></h1>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
